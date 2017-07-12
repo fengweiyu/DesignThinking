@@ -4,9 +4,9 @@
 * File Module		: 	TemplateMethodPattern.h
 * Description		: 	模版方法模式
 						主要放模版方法，同时模版方法调用各个基本方法
-						，所以也可以改名为TemplateMethod.c
+						，所以也可以改名为TemplateMethod.h
 						为统一名称,本文件也是模版方法模式的核心故还是
-						命名为TemplateMethodPattern.c
+						命名为TemplateMethodPattern.h
 									
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
