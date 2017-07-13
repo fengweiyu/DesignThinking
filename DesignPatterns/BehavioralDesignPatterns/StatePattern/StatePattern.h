@@ -29,7 +29,7 @@ typedef struct State//以电梯运行四种状态举例
 typedef struct FatherState//抽象出子类统一会设置上下状态函数
 {
 //void (*SetContext)(T_StateContext *i_ptStateContext);//由于面向对象语言中
-//每个子类new的时候都会有一个Context对象产生,切换状态时，
+//每个子类new的时候都会有一个Context引用产生,切换状态时，
 //就需要要设置context(下一个子类才能使用context来设置下一态)，
 //而C中只有一个,所以不需要
 	void (*SetState)(T_State *i_ptState);//供状态设置下一状态使用
