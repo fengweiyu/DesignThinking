@@ -1,13 +1,21 @@
 /*****************************************************************************
 * Copyright (C) 2017-2018 Hanson Yu  All rights reserved.
 ------------------------------------------------------------------------------
-* File Module		: 	TemplateMethodPattern.c
-* Description		: 	模版方法模式
-						主要放模版方法，同时模版方法调用各个基本方法
-						，所以也可以改名为TemplateMethod.c
-						为统一名称,本文件也是模版方法模式的核心故还是
-						命名为TemplateMethodPattern.c
-									
+* File Module		: 	TemplateMethodPatternUsage.c
+* Description		: 	模版方法模式的使用
+
+book@book-desktop:/work/projects/test/DesignPatterns$ gcc -o TemplateMethodPatternUsage 
+					HummerH1Model.c HummerH2Model.c TemplateMethodPattern.c TemplateMethodPatternUsage.c 
+book@book-desktop:/work/projects/test/DesignPatterns$ ./TemplateMethodPatternUsage 
+HummerH1 start...
+HummerH1 engine boom...
+HummerH1 alarm...
+HummerH1 stop...
+HummerH2 start...
+HummerH2 engine boom...
+HummerH2 alarm...
+HummerH2 stop...
+
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
 * Function List 		: 	
@@ -21,22 +29,28 @@
 #include"TemplateMethodPattern.h"
 
 
+
+
 /*****************************************************************************
--Fuction		: HummerRun
--Description	: 公有函数
+-Fuction		: main
+-Description	: 
 -Input			: 
 -Output 		: 
 -Return 		: 
 * Modify Date	  Version		 Author 		  Modification
 * -----------------------------------------------
-* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+* 2017/07/12    V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void HummerRun(T_HummerModel *i_ptHummerModel)
+int main(int argc,char **argv)
 {
-	i_ptHummerModel->Start();
-	i_ptHummerModel->EngineBoom();
-	i_ptHummerModel->Alarm();
-	i_ptHummerModel->Stop();
+ 	T_HummerModel tHummerModel=newHummerH1Model;
+
+	g_tHummerDemonstration.Run(&tHummerModel);
+	
+	tHummerModel=(T_HummerModel)newHummerH2Model;
+	g_tHummerDemonstration.Run(&tHummerModel);
+	
+	return 0;
 }
 
 

@@ -20,6 +20,12 @@
 #include"string.h"
 #include"TemplateMethodPattern.h"
 
+static void HummerRun(T_HummerModel *i_ptHummerModel);
+
+const T_HummerDemonstration g_tHummerDemonstration={
+	.Run=HummerRun,
+
+};
 
 /*****************************************************************************
 -Fuction		: HummerRun
@@ -31,7 +37,7 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void HummerRun(T_HummerModel *i_ptHummerModel)
+static void HummerRun(T_HummerModel *i_ptHummerModel)
 {
 	i_ptHummerModel->Start();
 	i_ptHummerModel->EngineBoom();

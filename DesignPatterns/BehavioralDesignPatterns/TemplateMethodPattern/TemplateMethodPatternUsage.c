@@ -4,9 +4,8 @@
 * File Module		: 	TemplateMethodPatternUsage.c
 * Description		: 	模版方法模式的使用
 
-book@book-desktop:/work/projects/test/DesignPatterns$ gcc -o TemplateMethodPatternUsage 
-					HummerH1Model.c HummerH2Model.c TemplateMethodPattern.c TemplateMethodPatternUsage.c 
-book@book-desktop:/work/projects/test/DesignPatterns$ ./TemplateMethodPatternUsage 
+book@book-desktop:/work/projects/test/DesignPatterns/TemplateMethodPattern$ gcc -o TemplateMethodPatternUsage TemplateMethodPattern.c HummerH1Model.c HummerH2Model.c TemplateMethodPatternUsage.c 
+book@book-desktop:/work/projects/test/DesignPatterns/TemplateMethodPattern$ ./TemplateMethodPatternUsage 
 HummerH1 start...
 HummerH1 engine boom...
 HummerH1 alarm...
@@ -15,6 +14,7 @@ HummerH2 start...
 HummerH2 engine boom...
 HummerH2 alarm...
 HummerH2 stop...
+
 
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
@@ -44,11 +44,11 @@ HummerH2 stop...
 int main(int argc,char **argv)
 {
  	T_HummerModel tHummerModel=newHummerH1Model;
-
-	g_tHummerDemonstration.Run(&tHummerModel);
+	
+	tHummerModel.tFatherDemonstration.Run(&tHummerModel);
 	
 	tHummerModel=(T_HummerModel)newHummerH2Model;
-	g_tHummerDemonstration.Run(&tHummerModel);
+	tHummerModel.tFatherDemonstration.Run(&tHummerModel);
 	
 	return 0;
 }
