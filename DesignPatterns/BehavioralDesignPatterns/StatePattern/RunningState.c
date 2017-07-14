@@ -29,7 +29,7 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void RunningStateOpen()
+void RunningStateOpen(T_State *ptThis)
 {
 }
 /*****************************************************************************
@@ -42,7 +42,7 @@ void RunningStateOpen()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void RunningStateClose()
+void RunningStateClose(T_State *ptThis)
 {
 
 }
@@ -56,7 +56,7 @@ void RunningStateClose()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void RunningStateRun()
+void RunningStateRun(T_State *ptThis)
 {
 	printf("Lift door run!\r\n");
 }
@@ -70,13 +70,10 @@ void RunningStateRun()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void RunningStateStop()
+void RunningStateStop(T_State *ptThis)
 {
-	T_StateContext tStateContext=newStateContext;
-	T_State tState=newStoppingState;
-	tStateContext.SetState(&tState);//切换状态
-	tStateContext.GetState(&tState);
-	tState.Stop();//执行，逻辑上过度 到下一态
+	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetStoppingState(),ptThis->tFatherState.GetContext());//切换状态
+	ptThis->tFatherState.GetContext().Stop();//执行，逻辑上过度 到下一态
 }
 
 

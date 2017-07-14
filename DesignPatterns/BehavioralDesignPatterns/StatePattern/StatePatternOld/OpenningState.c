@@ -1,8 +1,8 @@
 /*****************************************************************************
 * Copyright (C) 2017-2018 Hanson Yu  All rights reserved.
 ------------------------------------------------------------------------------
-* File Module		: 	ClosingState.c
-* Description		: 	关闭状态下的各种行为
+* File Module		: 	OpenningState.c
+* Description		: 	开门状态下的各种行为
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
 * Function List 		: 	
@@ -20,7 +20,7 @@
 
 
 /*****************************************************************************
--Fuction		: ClosingStateOpen
+-Fuction		: OpenningStateOpen
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -29,13 +29,12 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateOpen(T_State *ptThis)
+void OpenningStateOpen()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetOpenningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Open();//执行，逻辑上过度 到下一态
+	printf("Lift door open!\r\n");
 }
 /*****************************************************************************
--Fuction		: ClosingStateClose
+-Fuction		: OpenningStateClose
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -44,13 +43,17 @@ void ClosingStateOpen(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateClose(T_State *ptThis)
+void OpenningStateClose()
 {
-	printf("Lift door close!\r\n");
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newClosingState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Close();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
--Fuction		: ClosingStateRun
--Description	: 公有函数
+-Fuction		: OpenningStateRun
+-Description	: 门开肯定不运行
 -Input			: 
 -Output 		: 
 -Return 		: 
@@ -58,14 +61,13 @@ void ClosingStateClose(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateRun(T_State *ptThis)
+void OpenningStateRun()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetRunningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Run();//执行，逻辑上过度 到下一态
+
 }
 /*****************************************************************************
--Fuction		: ClosingStateStop
--Description	: 公有函数
+-Fuction		: OpenningStateStop
+-Description	: 门开肯定停止了
 -Input			: 
 -Output 		: 
 -Return 		: 
@@ -73,9 +75,9 @@ void ClosingStateRun(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateStop(T_State *ptThis)
+void OpenningStateStop()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetStoppingState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Stop();//执行，逻辑上过度 到下一态
+
 }
+
 

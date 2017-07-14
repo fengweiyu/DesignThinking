@@ -23,9 +23,14 @@
 
 
 static T_State g_tState;
+static const T_State g_tClosingState=newClosingState;
+static const T_State g_tStoppingState=newStoppingState;
+static const T_State g_tRunningState=newRunningState;
+static const T_State g_tOpenningState=newOpenningState;
+
 
 /*****************************************************************************
--Fuction		: SetState
+-Fuction		: GetClosingState
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -34,9 +39,24 @@ static T_State g_tState;
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void SetState(T_State *i_ptState)
+T_State GetClosingState()
 {
-	memcpy(&g_tState,i_ptState,sizeof(T_State));
+	return g_tClosingState;
+}
+
+/*****************************************************************************
+-Fuction		: GetStoppingState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+T_State GetStoppingState()
+{
+	return g_tStoppingState;
 }
 
 /*****************************************************************************
@@ -49,9 +69,56 @@ void SetState(T_State *i_ptState)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void GetState(T_State *o_ptState)
+T_State GetRunningState()
 {
-	memcpy(o_ptState,&g_tState,sizeof(T_State));
+	return g_tRunningState;
+}
+
+
+/*****************************************************************************
+-Fuction		: SetState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+T_State GetOpenningState()
+{
+	return g_tOpenningState;
+}
+
+/*****************************************************************************
+-Fuction		: SetState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+void SetState(T_State i_tState,T_StateContext i_tStateContext)
+{
+	memcpy(&g_tState,&i_tState,sizeof(T_State));//
+	g_tState.tFatherState.SetContext(i_tStateContext);//内部是引用,方便子类调用先实例化
+}
+
+/*****************************************************************************
+-Fuction		: SetState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+T_State GetState()
+{
+	return g_tState;
 }
 /*****************************************************************************
 -Fuction		: Open
@@ -65,7 +132,7 @@ void GetState(T_State *o_ptState)
 ******************************************************************************/
 void Open()
 {
-	g_tState.Open();
+	g_tState.Open(&g_tState);
 }
 /*****************************************************************************
 -Fuction		: Close
@@ -79,7 +146,7 @@ void Open()
 ******************************************************************************/
 void Close()
 {
-	g_tState.Close();
+	g_tState.Close(&g_tState);
 }
 /*****************************************************************************
 -Fuction		: Run
@@ -93,7 +160,7 @@ void Close()
 ******************************************************************************/
 void Run()
 {
-	g_tState.Run();
+	g_tState.Run(&g_tState);
 }
 /*****************************************************************************
 -Fuction		: Stop
@@ -107,7 +174,7 @@ void Run()
 ******************************************************************************/
 void Stop()
 {
-	g_tState.Stop();
+	g_tState.Stop(&g_tState);
 }
 
 

@@ -1,8 +1,13 @@
 /*****************************************************************************
 * Copyright (C) 2017-2018 Hanson Yu  All rights reserved.
 ------------------------------------------------------------------------------
-* File Module		: 	ClosingState.c
-* Description		: 	关闭状态下的各种行为
+* File Module		: 	StatePattern.c
+* Description		: 	状态模式
+						对各个状态进行管理，也可以改名为StateManage.c
+						为统一名称,本文件也是状态模式的核心故还是
+						命名为StatePattern.c
+						
+						
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
 * Function List 		: 	
@@ -17,10 +22,25 @@
 
 
 
+static T_State g_tState;
 
+/*****************************************************************************
+-Fuction		: SetState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+void SetState(T_State *i_ptState)
+{
+	memcpy(&g_tState,i_ptState,sizeof(T_State));
+}
 
 /*****************************************************************************
--Fuction		: ClosingStateOpen
+-Fuction		: SetState
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -29,13 +49,12 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateOpen(T_State *ptThis)
+void GetState(T_State *o_ptState)
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetOpenningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Open();//执行，逻辑上过度 到下一态
+	memcpy(o_ptState,&g_tState,sizeof(T_State));
 }
 /*****************************************************************************
--Fuction		: ClosingStateClose
+-Fuction		: Open
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -44,12 +63,12 @@ void ClosingStateOpen(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateClose(T_State *ptThis)
+void Open()
 {
-	printf("Lift door close!\r\n");
+	g_tState.Open();
 }
 /*****************************************************************************
--Fuction		: ClosingStateRun
+-Fuction		: Close
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -58,13 +77,12 @@ void ClosingStateClose(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateRun(T_State *ptThis)
+void Close()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetRunningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Run();//执行，逻辑上过度 到下一态
+	g_tState.Close();
 }
 /*****************************************************************************
--Fuction		: ClosingStateStop
+-Fuction		: Run
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -73,9 +91,23 @@ void ClosingStateRun(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateStop(T_State *ptThis)
+void Run()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetStoppingState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Stop();//执行，逻辑上过度 到下一态
+	g_tState.Run();
 }
+/*****************************************************************************
+-Fuction		: Stop
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+void Stop()
+{
+	g_tState.Stop();
+}
+
 

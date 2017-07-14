@@ -29,7 +29,7 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void OpenningStateOpen()
+void OpenningStateOpen(T_State *ptThis)
 {
 	printf("Lift door open!\r\n");
 }
@@ -43,13 +43,10 @@ void OpenningStateOpen()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void OpenningStateClose()
+void OpenningStateClose(T_State *ptThis)
 {
-	T_StateContext tStateContext=newStateContext;
-	T_State tState=newClosingState;
-	tStateContext.SetState(&tState);//切换状态
-	tStateContext.GetState(&tState);
-	tState.Close();//执行，逻辑上过度 到下一态
+	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetClosingState(),ptThis->tFatherState.GetContext());//切换状态
+	ptThis->tFatherState.GetContext().Close();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
 -Fuction		: OpenningStateRun
@@ -61,7 +58,7 @@ void OpenningStateClose()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void OpenningStateRun()
+void OpenningStateRun(T_State *ptThis)
 {
 
 }
@@ -75,7 +72,7 @@ void OpenningStateRun()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void OpenningStateStop()
+void OpenningStateStop(T_State *ptThis)
 {
 
 }

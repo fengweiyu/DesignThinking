@@ -1,8 +1,8 @@
 /*****************************************************************************
 * Copyright (C) 2017-2018 Hanson Yu  All rights reserved.
 ------------------------------------------------------------------------------
-* File Module		: 	ClosingState.c
-* Description		: 	关闭状态下的各种行为
+* File Module		: 	StoppingState.c
+* Description		: 	停止状态下的各种行为
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
 * Function List 		: 	
@@ -20,7 +20,7 @@
 
 
 /*****************************************************************************
--Fuction		: ClosingStateOpen
+-Fuction		: StoppingStateOpen
 -Description	: 公有函数
 -Input			: 
 -Output 		: 
@@ -29,14 +29,18 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateOpen(T_State *ptThis)
+void StoppingStateOpen()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetOpenningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Open();//执行，逻辑上过度 到下一态
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newOpenningState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Open();//执行，逻辑上过度 到下一态
+
 }
 /*****************************************************************************
--Fuction		: ClosingStateClose
--Description	: 公有函数
+-Fuction		: StoppingStateClose
+-Description	: 停止本来门就是关的
 -Input			: 
 -Output 		: 
 -Return 		: 
@@ -44,13 +48,13 @@ void ClosingStateOpen(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateClose(T_State *ptThis)
+void StoppingStateClose()
 {
-	printf("Lift door close!\r\n");
+
 }
 /*****************************************************************************
--Fuction		: ClosingStateRun
--Description	: 公有函数
+-Fuction		: StoppingStateRun
+-Description	: 停止接下来再运行
 -Input			: 
 -Output 		: 
 -Return 		: 
@@ -58,14 +62,17 @@ void ClosingStateClose(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateRun(T_State *ptThis)
+void StoppingStateRun()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetRunningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Run();//执行，逻辑上过度 到下一态
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newRunningState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Run();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
--Fuction		: ClosingStateStop
--Description	: 公有函数
+-Fuction		: StoppingStateStop
+-Description	: 停止动作得到停止状态
 -Input			: 
 -Output 		: 
 -Return 		: 
@@ -73,9 +80,9 @@ void ClosingStateRun(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateStop(T_State *ptThis)
+void StoppingStateStop()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetStoppingState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Stop();//执行，逻辑上过度 到下一态
+	printf("Lift door stop!\r\n");
 }
+
 

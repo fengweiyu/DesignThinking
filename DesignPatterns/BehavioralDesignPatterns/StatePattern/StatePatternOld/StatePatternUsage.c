@@ -4,13 +4,12 @@
 * File Module		: 	StatePatternUsage.c
 * Description		: 	状态模式的使用
 
-book@book-desktop:/work/projects/test/DesignPatterns/StatePattern$ gcc -o StatePatternUsage RunningState.c StoppingState.c  OpenningState.c ClosingState.c State.c StatePattern.c StatePatternUsage.c 
-book@book-desktop:/work/projects/test/DesignPatterns/StatePattern$ ./StatePatternUsage 
+book@book-desktop:/work/projects/test/DesignPatterns$ gcc -o StatePatternUsage RunningState.c StoppingState.c  OpenningState.c ClosingState.c StatePattern.c StatePatternUsage.c 
+book@book-desktop:/work/projects/test/DesignPatterns$ ./StatePatternUsage 
 Lift door open!
 Lift door close!
 Lift door run!
 Lift door stop!
-
 
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
@@ -41,7 +40,7 @@ int main(int argc,char **argv)
 {
  	T_StateContext tStateContext=newStateContext;
 	T_State tState=newClosingState;
-	tStateContext.SetState(tState,tStateContext);
+	tStateContext.SetState(&tState);
 
 	tStateContext.Open();
 	tStateContext.Close();

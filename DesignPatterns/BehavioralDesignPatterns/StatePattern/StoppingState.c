@@ -29,13 +29,10 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void StoppingStateOpen()
+void StoppingStateOpen(T_State *ptThis)
 {
-	T_StateContext tStateContext=newStateContext;
-	T_State tState=newOpenningState;
-	tStateContext.SetState(&tState);//切换状态
-	tStateContext.GetState(&tState);
-	tState.Open();//执行，逻辑上过度 到下一态
+	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetOpenningState(),ptThis->tFatherState.GetContext());//切换状态
+	ptThis->tFatherState.GetContext().Open();//执行，逻辑上过度 到下一态
 
 }
 /*****************************************************************************
@@ -48,7 +45,7 @@ void StoppingStateOpen()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void StoppingStateClose()
+void StoppingStateClose(T_State *ptThis)
 {
 
 }
@@ -62,13 +59,10 @@ void StoppingStateClose()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void StoppingStateRun()
+void StoppingStateRun(T_State *ptThis)
 {
-	T_StateContext tStateContext=newStateContext;
-	T_State tState=newRunningState;
-	tStateContext.SetState(&tState);//切换状态
-	tStateContext.GetState(&tState);
-	tState.Run();//执行，逻辑上过度 到下一态
+	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetRunningState(),ptThis->tFatherState.GetContext());//切换状态
+	ptThis->tFatherState.GetContext().Run();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
 -Fuction		: StoppingStateStop
@@ -80,7 +74,7 @@ void StoppingStateRun()
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void StoppingStateStop()
+void StoppingStateStop(T_State *ptThis)
 {
 	printf("Lift door stop!\r\n");
 }

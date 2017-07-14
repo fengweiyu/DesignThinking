@@ -1,17 +1,10 @@
 /*****************************************************************************
 * Copyright (C) 2017-2018 Hanson Yu  All rights reserved.
 ------------------------------------------------------------------------------
-* File Module		: 	StatePatternUsage.c
-* Description		: 	状态模式的使用
-
-book@book-desktop:/work/projects/test/DesignPatterns/StatePattern$ gcc -o StatePatternUsage RunningState.c StoppingState.c  OpenningState.c ClosingState.c State.c StatePattern.c StatePatternUsage.c 
-book@book-desktop:/work/projects/test/DesignPatterns/StatePattern$ ./StatePatternUsage 
-Lift door open!
-Lift door close!
-Lift door run!
-Lift door stop!
-
-
+* File Module		: 	State.c
+* Description		: 	各种细分状态的父类,主要是切换状态的方法
+						
+						
 * Created			: 	2017.07.12.
 * Author			: 	Yu Weifeng
 * Function List 		: 	
@@ -26,30 +19,37 @@ Lift door stop!
 
 
 
+static T_StateContext g_tStateContext;
 
 /*****************************************************************************
--Fuction		: main
--Description	: 
+-Fuction		: SetContext
+-Description	: 公有函数
 -Input			: 
 -Output 		: 
 -Return 		: 
 * Modify Date	  Version		 Author 		  Modification
 * -----------------------------------------------
-* 2017/07/12    V1.0.0		 Yu Weifeng 	  Created
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-int main(int argc,char **argv)
+void SetContext(T_StateContext i_tStateContext)
 {
- 	T_StateContext tStateContext=newStateContext;
-	T_State tState=newClosingState;
-	tStateContext.SetState(tState,tStateContext);
-
-	tStateContext.Open();
-	tStateContext.Close();
-	tStateContext.Run();
-	tStateContext.Stop();
-
-	
-	return 0;
+	memcpy(&g_tStateContext,&i_tStateContext,sizeof(T_StateContext));
 }
+
+/*****************************************************************************
+-Fuction		: SetState
+-Description	: 公有函数
+-Input			: 
+-Output 		: 
+-Return 		: 
+* Modify Date	  Version		 Author 		  Modification
+* -----------------------------------------------
+* 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
+******************************************************************************/
+T_StateContext GetContext()
+{
+	return g_tStateContext;
+}
+
 
 

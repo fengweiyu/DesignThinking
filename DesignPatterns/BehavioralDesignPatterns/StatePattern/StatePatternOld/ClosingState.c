@@ -29,10 +29,13 @@
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateOpen(T_State *ptThis)
+void ClosingStateOpen()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetOpenningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Open();//执行，逻辑上过度 到下一态
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newOpenningState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Open();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
 -Fuction		: ClosingStateClose
@@ -44,7 +47,7 @@ void ClosingStateOpen(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateClose(T_State *ptThis)
+void ClosingStateClose()
 {
 	printf("Lift door close!\r\n");
 }
@@ -58,10 +61,13 @@ void ClosingStateClose(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateRun(T_State *ptThis)
+void ClosingStateRun()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetRunningState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Run();//执行，逻辑上过度 到下一态
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newRunningState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Run();//执行，逻辑上过度 到下一态
 }
 /*****************************************************************************
 -Fuction		: ClosingStateStop
@@ -73,9 +79,12 @@ void ClosingStateRun(T_State *ptThis)
 * -----------------------------------------------
 * 2017/07/12	  V1.0.0		 Yu Weifeng 	  Created
 ******************************************************************************/
-void ClosingStateStop(T_State *ptThis)
+void ClosingStateStop()
 {
-	ptThis->tFatherState.GetContext().SetState(ptThis->tFatherState.GetContext().GetStoppingState(),ptThis->tFatherState.GetContext());//切换状态
-	ptThis->tFatherState.GetContext().Stop();//执行，逻辑上过度 到下一态
+	T_StateContext tStateContext=newStateContext;
+	T_State tState=newStoppingState;
+	tStateContext.SetState(&tState);//切换状态
+	tStateContext.GetState(&tState);
+	tState.Stop();//执行，逻辑上过度 到下一态
 }
 
