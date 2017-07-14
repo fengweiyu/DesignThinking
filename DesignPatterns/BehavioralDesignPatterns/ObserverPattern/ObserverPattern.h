@@ -21,7 +21,7 @@ typedef struct Observer
 
 typedef struct Observable
 {
-	int (*AddObserver)(T_Observer *i_ptObserver);
+	int (*AddObserver)(T_Observer *i_ptObserver);//传参，接口,也就是抽象耦合
 	int (*DeleteObserver)(T_Observer *i_ptObserver);
 	void (*NotifyObservers)(char *i_strContext);
 }T_Observable;//抽象出被观察者
