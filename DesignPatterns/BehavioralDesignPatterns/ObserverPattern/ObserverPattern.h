@@ -31,7 +31,7 @@ typedef struct Hanfeizi//C的局限,使用继承(覆写)代替实现两个接口更好
 	T_Observable *ptObservable;
 	void (*HaveBreakfast)();
 	void (*HaveFun)();
-}T_Hanfeizi;
+}T_Hanfeizi;//被观察者接口
 
 
 int HanfeiziAddObserver(T_Observer *i_ptObserver);
