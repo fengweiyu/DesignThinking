@@ -26,7 +26,8 @@ typedef struct Context
 	int (*Uncompress)(char *i_strSource,char *i_strDestination);
 }T_Context;
 
-//对执行效率有要求，需要并发时，则可不使用单例
+//环境角色一般一个就够了,
+//如果对执行效率有要求，需要并发时，则可不使用单例
 extern const T_Context g_tContext;
 
 

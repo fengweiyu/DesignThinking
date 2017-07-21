@@ -18,26 +18,26 @@ typedef struct Product
 	void (*BeProducted)();
 	void (*BeSelled)();
 
-}T_Product;
+}T_Product;//实现化角色
 
 typedef struct Corp
 {
 	T_Product tProduct;//不同公司不同产品,所以定义在外面//构造传入，同时私有变量不可直接访问
 	
 	void (*MakeMoney)(struct Corp *ptThis);//抽象出公司的职责 赚钱
-}T_Corp;
+}T_Corp;//抽象化角色
 
 typedef struct HouseCorp
 {
 	T_Corp tFatherCorp;//继承
 	void (*MakeMoney)(struct HouseCorp *ptThis);
-}T_HouseCorp;
+}T_HouseCorp;//修正抽象化角色
 
 typedef struct ShanzhaiCorp
 {
 	T_Corp tFatherCorp;
 	void (*MakeMoney)(struct ShanzhaiCorp *ptThis);
-}T_ShanzhaiCorp;
+}T_ShanzhaiCorp;//修正抽象化角色
 
 void MakeMoney(T_Corp *i_ptThis);
 
