@@ -4,7 +4,7 @@
 * File Module		: 	FactoryMethodPattern.c
 * Description		: 	工厂方法模式
 						本文件是超人生产工厂的具体实现
-						以进生产超人举例	
+						以生产超人举例	
 						
 * Created			: 	2017.07.31.
 * Author			: 	Yu Weifeng

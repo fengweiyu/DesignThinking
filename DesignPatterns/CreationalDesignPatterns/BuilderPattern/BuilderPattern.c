@@ -4,7 +4,7 @@
 * File Module		: 	BuilderPattern.c
 * Description		: 	建造者模式
 						本文件是导演类的具体实现
-						以进创造各种超人举例	
+						以创造各种超人举例	
 						
 * Created			: 	2017.08.01.
 * Author			: 	Yu Weifeng
